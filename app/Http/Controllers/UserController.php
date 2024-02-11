@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Contracts\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -15,6 +17,8 @@ class UserController extends Controller
         $remember = $r->filled("remember");
 
         if(Auth::attempt($credentials, $remember)){
+
+            $user = Auth::user();
             return redirect("/dashboard");
         }
         return redirect()->back()->withErrors([

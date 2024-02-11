@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LogoutController;
-
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\RegisterControl;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,6 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
 Route::get('/forgotPassword', function () {
     return view('forgotPassword');
 });
@@ -49,3 +46,5 @@ Route::post("/forgotPassword", [ForgotPasswordController::class, 'store'])->name
 
 Route::post('passwordReset/{token}', [ForgotPasswordController::class, 'reset'])->name('password.reset');
 Route::get('passwordReset/{token}', [ForgotPasswordController::class, 'init']);
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);

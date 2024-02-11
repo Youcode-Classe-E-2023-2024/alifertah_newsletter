@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +67,7 @@ class LogoutController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
- 
+
         return redirect('/');
      }
 }

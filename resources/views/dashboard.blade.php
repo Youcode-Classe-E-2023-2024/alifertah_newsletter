@@ -23,19 +23,24 @@
         <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
         </tr>
+        @foreach ($users as $user)
         <tr >
-            <td class="px-6 py-4 whitespace-nowrap">Test</td>
-            <td class="px-6 py-4 whitespace-nowrap">Test</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
             <label for="underline_select" class="sr-only">Underline select</label>
             <select id="underline_select" class="block py-2.5 px-0 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                <option selected>Choose a country</option>
+                @foreach ($user->roles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
                 <option value="US">Admin</option>
                 <option value="CA">Moderator</option>
             </select>
             </td>
         </tr>
+        @endforeach
     </thead>
     <tbody id="users" class="bg-white divide-y divide-gray-200">
     </tbody>
