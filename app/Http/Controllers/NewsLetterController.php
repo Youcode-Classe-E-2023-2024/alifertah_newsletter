@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\OrderShipped;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 
@@ -15,11 +17,10 @@ class NewsLetterController extends Controller
         // $r->validate([
         //     'email' => 'required|email|unique:emails, email',
         // ]);
-        Mail::mailer('')->to($r->email);
         $email = new Email();
         $email->email = $r->input('email');
         $email->save();
-
+        Mail::to($email)->send(new OrderShipped(""));
         return redirect()->back()->with('success', "You have been subscribed to the news letter");
     }
 
