@@ -19,6 +19,11 @@ class RegisterControl extends Controller
             'email' => $r->email,
             'password' => bcrypt($r->password)
         ]);
+
+        if ($r->hasFile('img')) {
+            $user->addMedia($r->file('img'))
+                ->toMediaCollection('avatar');
+        }
         $user->assignRole("editor");
         return redirect("/login")->with('success', ("User registred successfully"));
     }
