@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\RegisterControl;
 use App\Http\Controllers\RolesPermissions;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -37,6 +38,10 @@ Route::get('/forgotPassword', function () {
     return view('forgotPassword');
 });
 
+Route::get('/uploadMedia', function () {
+    return view('mediaUpload');
+});
+
 Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name("logout");
 
 Route::post("/subscribe", [NewsLetterController::class, 'subscribe'])->name("subscribe");
@@ -53,3 +58,5 @@ Route::post('/rolesPermissions', [RolesPermissions::class, "changeRole"])->name(
 
 
 Route::get('/newsLetterEditor', [NewsLetterController::class, "newsLetterEditor"])->name("newsLetterEditor");
+
+Route::post('/uploadMedia', [UploadController::class, "upload"])->name("uploadMedia");
