@@ -59,4 +59,4 @@ Route::post('/rolesPermissions', [RolesPermissions::class, "changeRole"])->name(
 
 Route::get('/newsLetterEditor', [NewsLetterController::class, "newsLetterEditor"])->name("newsLetterEditor");
 
-Route::post('/uploadMedia', [UploadController::class, "upload"])->name("uploadMedia");
+Route::post('/uploadMedia', [UploadController::class, "store"])->name("uploadMedia");
