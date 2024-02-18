@@ -62,8 +62,11 @@ Route::post('/uploadMedia', [UploadController::class, "store"])->name("uploadMed
 
 
 Route::middleware('isLoggedIn')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); 
     Route::get('/newsLetterEditor', [UploadController::class, "newsLetterEditor"])->name("newsLetterEditor");
     Route::get('/uploadMedia', function () {return view('mediaUpload');});
     Route::get('/rolesPermissions', [RolesPermissions::class, "show"]);
+    Route::middleware('isAdmin')->group(function(){
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); 
+    });
 });
+

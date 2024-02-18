@@ -8,8 +8,9 @@ class Kernel extends HttpKernel
 {
     protected $routeMiddleware = [
         'isLoggedIn' => \App\Http\Middleware\IsLoggedIn::class,
+        'isAdmin' => \App\Http\Middleware\AdminAccess::class,
     ];
-    
+
     /**
      * The application's global HTTP middleware stack.
      *
