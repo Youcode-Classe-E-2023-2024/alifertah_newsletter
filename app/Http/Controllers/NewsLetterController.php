@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 
 use App\Models\Email;
+use App\Models\Medias;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +24,5 @@ class NewsLetterController extends Controller
         Mail::to($email)->send(new OrderShipped(""));
         return redirect()->back()->with('success', "You have been subscribed to the news letter");
     }
-
-    public function newsLetterEditor(){
-        return view("newsLetterEditor");
-    }
+    
 }

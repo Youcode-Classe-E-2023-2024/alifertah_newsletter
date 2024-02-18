@@ -38,9 +38,7 @@ Route::get('/forgotPassword', function () {
     return view('forgotPassword');
 });
 
-Route::get('/uploadMedia', function () {
-    return view('mediaUpload');
-});
+
 
 Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name("logout");
 
@@ -52,11 +50,20 @@ Route::post("/forgotPassword", [ForgotPasswordController::class, 'store'])->name
 Route::post('passwordReset/{token}', [ForgotPasswordController::class, 'reset'])->name('password.reset');
 Route::get('passwordReset/{token}', [ForgotPasswordController::class, 'init']);
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard']);
-Route::get('/rolesPermissions', [RolesPermissions::class, "show"]);
 Route::post('/rolesPermissions', [RolesPermissions::class, "changeRole"])->name("changeRole");
 
 
-Route::get('/newsLetterEditor', [NewsLetterController::class, "newsLetterEditor"])->name("newsLetterEditor");
 
 Route::post('/uploadMedia', [UploadController::class, "store"])->name("uploadMedia");
+
+
+
+
+
+
+Route::middleware('isLoggedIn')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); 
+    Route::get('/newsLetterEditor', [UploadController::class, "newsLetterEditor"])->name("newsLetterEditor");
+    Route::get('/uploadMedia', function () {return view('mediaUpload');});
+    Route::get('/rolesPermissions', [RolesPermissions::class, "show"]);
+});
